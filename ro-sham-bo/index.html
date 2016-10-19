@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <style>
+            .third {
+                width: 33%;
+                float: left;
+            }
+        </style>
+    </head>
+
+    <body>
+        <center><h1>Rock Paper Scissors</h1></center>
+
+        <select id="your_move" name="your_move">
+            <option value="rock">Rock</option>
+            <option value="paper">Paper</option>
+            <option value="scissors">Scissors</option>
+        </select>
+        <button id="submit">Submit</button>
+
+        <div>
+            <div id="yours" class="third">
+                <h3>You chose:</h3>
+                <div id="your_move_image"></div>
+            </div>
+
+            <div id="outcome" class="third">
+                <h2 id="outcome_text"></h2>
+                <div id="outcome_image"></div>
+            </div>
+
+            <div id="theirs" class="third">
+                <h3>They chose:</h3>
+                <div id="their_move_image"></div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            /*
+             * CHANGE ME: these are the images we will use in the game
+             */
+            var ROCK_IMAGE     = "https://media.giphy.com/media/AjkKC77JZVCEg/giphy.gif";
+            var PAPER_IMAGE    = "https://media.giphy.com/media/qan0r16ZJY2Qg/giphy.gif";
+            var SCISSORS_IMAGE = "https://media.giphy.com/media/4IL57vrZnSb1S/giphy.gif";
+            var WIN_IMAGE      = "https://media.giphy.com/media/3o7qE7NNv8zuBubR9m/giphy.gif";
+            var LOSE_IMAGE     = "https://media.giphy.com/media/3obiY2RsbUCnC/giphy.gif";
+            var TIE_IMAGE      = "https://media.giphy.com/media/su57mR8vmAfss/giphy.gif";
+
+            // connect the function to the button.
+            document.getElementById("submit").onclick = playGame;
+
+            // this gets called when you click the button.
+            function playGame() {
+                // get the value that the user chose
+                var your_move = document.getElementById("your_move").value;
+
+                // choose a value for the computer
+                var their_move;
+                var randomValue = Math.random();
+                if (randomValue < 0.33) {
+                    their_move = "rock";
+                } else if (randomValue < 0.66) {
+                    their_move = "paper";
+                } else {
+                    their_move = "scissors";
+                }
+
+                // see who wins!
+                var winner = checkMoves(your_move, their_move);
+
+                // draw all the images
+                if (your_move === "rock") {
+                    setYourImage(ROCK_IMAGE);
+                } else if (your_move === "paper") {
+                    setYourImage(PAPER_IMAGE);
+                } else if (your_move === "scissors") {
+                    setYourImage(SCISSORS_IMAGE);
+                }
+
+                if (their_move === "rock") {
+                    setTheirImage(ROCK_IMAGE);
+                } else if (their_move === "paper") {
+                    setTheirImage(PAPER_IMAGE);
+                } else if (their_move === "scissors") {
+                    setTheirImage(SCISSORS_IMAGE);
+                }
+
+                if (winner === "you") {
+                    setOutcomeImage(WIN_IMAGE);
+                    document.getElementById("outcome_text").innerHTML = "YOU WIN";
+                } else if (winner === "them") {
+                    setOutcomeImage(LOSE_IMAGE);
+                    document.getElementById("outcome_text").innerHTML = "YOU LOSE LOL";
+                } else if (winner === "tie") {
+                    setOutcomeImage(TIE_IMAGE);
+                    document.getElementById("outcome_text").innerHTML = "YOU TIED WITH THEM";
+                }
+            }
+
+            // this checks the moves and determines the winner.
+            // FIXME: use `return` to send back the winner for each possible pairing
+            // of moves.
+            function checkMoves(your_move, their_move) {
+                if (your_move === "rock" && their_move === "rock") {
+                    return "tie";
+                } else if (your_move === "rock" && their_move === "paper") {
+                    return "them";
+                } else if (your_move === "rock" && their_move === "scissors") {
+                    return "you";
+                } else if (your_move === "paper" && their_move === "rock") {
+                    return "you";
+                } else if (your_move === "paper" && their_move === "paper") {
+                    return "tie";
+                } else if (your_move === "paper" && their_move === "scissors") {
+                    return "them";
+                } else if (your_move === "scissors" && their_move === "rock") {
+                    return "them";
+                } else if (your_move === "scissors" && their_move === "paper") {
+                    return "you";
+                } else if (your_move === "scissors" && their_move === "scissors") {
+                    return "tie";
+                }
+            }
+
+            // this sets the image for your move.
+            function setYourImage(image) {
+                var container = document.getElementById("your_move_image");
+                container.innerHTML = '<img width="100%" src="' + image + '">';
+            }
+
+            // this sets the image for their move.
+            function setTheirImage(image) {
+                var container = document.getElementById("their_move_image");
+                container.innerHTML = '<img width="100%" src="' + image + '">';
+            }
+
+            // this sets the image for the outcome.
+            function setOutcomeImage(image) {
+                var container = document.getElementById("outcome_image");
+                container.innerHTML = '<img width="100%" src="' + image + '">';
+            }
+        </script>
+    </body>
+</html>
