@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Dog Ball</title>
+    </head>
+
+    <body style="margin: 0; padding: 0">
+        <div style="position: absolute; width: 1000px; height: 800px; border: 1px black solid; margin: 0; padding: 0;"></div>
+        <img id="ball" style="position: absolute" src="https://media.giphy.com/media/90sGm2Ld0Z66Y/giphy.gif" width="200"/>
+
+        <script type="text/javascript">
+            var image = document.getElementById("ball");
+            var width = 1000;
+            var height = 800;
+
+            var x = 600;
+            var y = 200;
+
+            var xSpeed = 1;
+            var ySpeed = 1;
+
+            function gameStep() {
+                if (x + image.width > width || x < 0) {
+                    xSpeed = -xSpeed;
+                }
+                if (y + image.height > height || y < 0) {
+                    ySpeed = -ySpeed;
+                }
+
+                x = x + xSpeed;
+                y = y + ySpeed;
+
+
+                image.style.left = x + "px";
+                image.style.top = y + "px";
+            };
+
+            setInterval(gameStep, 5);
+        </script>
+    </body>
+</html>
