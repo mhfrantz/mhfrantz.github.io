@@ -1,0 +1,26 @@
+body {
+    background-color: #001f44;
+    color: #777777;
+    font-weight: normal;
+    font-style: normal;
+}
+h1 {
+    font-family: 'Meatloaf';
+    font-size: 400%;
+}
+h2 {
+    font-family: 'LabelMaker';
+    font-size: 200%;
+}
+@font-face {
+    font-family: Meatloaf;
+    src: url('fonts/Meatloaf.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: LabelMaker;
+    src: url('fonts/Ordnerin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
